@@ -11,6 +11,6 @@ def login():
 def logout():
     return "<p>You are logged out. </p>"
 
-@auth.route('/sign-up')
+@auth.route('/sign_up')
 def signUp():
     return render_template("sign_up.html")
