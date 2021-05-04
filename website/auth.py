@@ -3,6 +3,7 @@ from .models import User
 #import user security functionality - runs a hashing function on the password
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
+from flask_login import login_user, login_required, current_user, logout_user
 
 auth = Blueprint('auth', __name__)
 
@@ -20,15 +21,22 @@ def login():
             #if the user is found, check the hashed password entered in the form against what is already hashed and stored
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
+                
+                #remembers that user is logged in
+                login_user(user, remember=True)
+                return redirect(url_for('views.home'))
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
             flash("Email does not exist.", category='error')
-    return render_template("login.html")
+    return render_template("login.html", user=current_user)
 
 @auth.route('/logout')
+#logout route cannot be accessed unless a user is logged in. 
+@login_required
 def logout():
-    return "<p>You are logged out. </p>"
+    logout_user()
+    return redirect(url_for('auth.login'))
 
 # sign-up form
 @auth.route('/sign_up', methods=['GET','POST'])
@@ -60,8 +68,11 @@ def signUp():
             db.session.add(newUser)
             db.session.commit()
             
+            #login in the user and keep them logged in.
+            login_user(user, remember=True)
             flash('Account created!', category="success")
+
 
             #after account is successfully created redirect the new user to the homepage.
             return redirect(url_for('views.home'))
-    return render_template("sign_up.html")
+    return render_template("sign_up.html",user=current_user)
