@@ -1,4 +1,42 @@
-{% extends "base.html" %} {%block title%}New Title{%endblock%} {% block content
-%}
-<p>This is the home page</p>
+{% extends "base.html" %} {%block title%}New Title{%endblock%} {% block content %}
+<h1 align='center>' Reports </h1>
+<ul class='list-group list-group-flush' id='reports'>
+{% for report in user.reports %}
+Headline: <li class="list-group-item"> {{ report.title }} </li>
+Issue: <li class="list-group-item"> {{ report.issue }} </li>
+URL <li class="list-group-item"> {{ report.url }} </li>
+<li class="list-group-item"> Date submitted: {{ report.date }} </li>
+{% endfor %}
+</ul>
+<h1 align="center"> Bug Report </h1>
+<form method="POST">
+
+  <div class="form-group">
+    <label for="title"> <h2>Title</h2></label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      name="title"
+      placeholder="Your headline"
+    />
+
+    <label for='issue'> Issue </label>
+  <textarea name="issue" id="issue" class="form-control" placeholder="Please describe your issue."></textarea>
+
+<div class="form-group">
+    <label for="url"> URL</label>
+    <input
+      type="text"
+      class="form-control"
+      id="url"
+      name="url"
+      placeholder="Where did you find this issue?"
+    />
+
+  <br />
+  <div align='center'>
+    <button type='submit' class="btn btn-primary"> Add Report </botton>
+    </div>
+</form>
 {% endblock %}

@@ -10,7 +10,7 @@ class Report(db.Model):
     url = db.Column(db.String(150))
     
     #timestamp for report creation
-    date = db.Column(db.DateTime(timezone=True), default=func.now)
+    date = db.Column(db.DateTime(timezone=True), default=func.now())
     
     #associate each report with a user through through a foreign key.
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
