@@ -3,12 +3,24 @@
 <ul class='list-group list-group-flush' id='reports'>
 {% for report in user.reports %}
 Headline: <li class="list-group-item"> {{ report.title }} </li>
-Issue: <li class="list-group-item"> {{ report.issue }} </li>
-URL <li class="list-group-item"> {{ report.url }} </li>
-<li class="list-group-item"> Date submitted: {{ report.date }} </li>
+<li class="list-group-item"> Issue: {{ report.issue }}
+
+<!-- delete a report based on its id, with the deleteNote function in 'index.js' via the 'base.html' reference -->
+<button type='button' class='close' onClick='deleteReport({{report.id}})'>
+  <span aria-hidden='true'>&times;</span>
+</button>
+
+
+ </li>
+<li class="list-group-item"> URL: {{ report.url }} </li>
+<li class="list-group-item"> Date submitted: {{ report.date }} 
+</li>
 {% endfor %}
 </ul>
+
 <h1 align="center"> Bug Report </h1>
+
+
 <form method="POST">
 
   <div class="form-group">
@@ -39,4 +51,5 @@ URL <li class="list-group-item"> {{ report.url }} </li>
     <button type='submit' class="btn btn-primary"> Add Report </botton>
     </div>
 </form>
+
 {% endblock %}
