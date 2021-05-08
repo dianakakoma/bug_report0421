@@ -1,20 +1,65 @@
 {% extends "base.html" %} {%block title%}New Title{%endblock%} {% block content %}
+
+
 <h1 align='center>' Reports </h1>
+List of reports
 <ul class='list-group list-group-flush' id='reports'>
 {% for report in user.reports %}
-Headline: <li class="list-group-item"> {{ report.title }} </li>
+<!--
+ <li class="list-group-item"> Headline: {{ report.title }} </li>
 <li class="list-group-item"> Issue: {{ report.issue }}
 
-<!-- delete a report based on its id, with the deleteNote function in 'index.js' via the 'base.html' reference -->
+delete a report based on its id, with the deleteNote function in 'index.js' via the 'base.html' reference 
 <button type='button' class='close' onClick='deleteReport({{report.id}})'>
   <span aria-hidden='true'>&times;</span>
 </button>
 
-
  </li>
+
 <li class="list-group-item"> URL: {{ report.url }} </li>
 <li class="list-group-item"> Date submitted: {{ report.date }} 
 </li>
+-->
+
+<!--Table -->
+
+<div class="table-responsive">
+<table class="table table-sm table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col"> Report Id</th>
+      <th scope="col"> Headline </th>
+      <th scope="col"> Issue </th>
+      <th scope="col"> Date </th>
+      <th scope="col"> Update </th>
+      <th scope="col"> Delete </th>
+
+      </th>
+      <th scope="col"> Date </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{ report.id }}</th>
+      <td> {{ report.title }} </td>
+      <td> {{ report.issue }} </td>
+      <td> {{ report.date }} </td>
+      <td> <p>Coming Soon</p> </td>
+      
+      <td> 
+      {<!-- delete a report based on its id, with the deleteNote function in 'index.js' via the 'base.html' reference -->
+<button type='button' class='close' onClick='deleteReport({{report.id}})'>
+  <span aria-hidden='true'>&times;</span>
+</button>}
+</td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+<!--End Table-->
+
 {% endfor %}
 </ul>
 
